@@ -45,7 +45,7 @@ export class WelcomeScreen extends React.Component {
                     style={styles.preview}
                     aspect={Camera.constants.Aspect.fill}>
                 </Camera>
-                <Text style={styles.capture} onPress={this.takePicture.bind(this)}>Capture</Text>
+                <Text style={styles.capture} onPress={this.takePicture.bind(this)}>Capture 3</Text>
             </View>
         );
     }
