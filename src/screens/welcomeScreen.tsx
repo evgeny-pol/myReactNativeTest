@@ -3,30 +3,32 @@ import { View, Text, StyleSheet, Image, Platform } from 'react-native';
 import BaseScreen from '../components/baseScreen';
 import images from '../images';
 import Camera from 'react-native-camera';
+import ImageRecognizer from '../ImageRecognizer';
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'row',
     },
     preview: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center'
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
     capture: {
-      position: 'absolute',
-      bottom: 0,
-      backgroundColor: '#fff',
-      borderRadius: 5,
-      color: '#000',
-      padding: 10,
-      margin: 40
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        color: '#000',
+        padding: 10,
+        margin: 40
     }
-  });
+});
 
 export class WelcomeScreen extends React.Component {
     camera: any;
+    recognizer: any;
 
     render() {
         return (
@@ -48,11 +50,25 @@ export class WelcomeScreen extends React.Component {
         );
     }
 
+    componentDidMount() {
+        this.recognizer = new ImageRecognizer({
+            model: require('../../assets/model.pb'),
+            labels: require('../../assets/labels.txt'),
+        });
+    }
+
     async takePicture() {
         const options = {};
         try {
             const data = await this.camera.capture({ metadata: options });
-            alert("Picture taken");
+            const results = await this.recognizer.recognize({
+                image: data.path,
+                inputName: 'Placeholder',
+                outputName: 'loss',
+            });
+            if (results.length > 0) {
+                alert(`Name: ${results[0].name} - Confidence: ${results[0].confidence}`);
+            }
         }
         catch (err) {
             alert(err);
