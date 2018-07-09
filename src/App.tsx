@@ -11,49 +11,31 @@ import { PushScreen } from './screens/pushScreen';
 import { CodePushScreen } from './screens/codePushScreen';
 
 const RootTabNavigator = TabNavigator(
-  {
-    Welcome: {
-      screen: WelcomeScreen,
+    {
+        Welcome: {
+            screen: WelcomeScreen,
+        },
+        CodePush: {
+            screen: CodePushScreen
+        }
     },
-    Build: {
-      screen: BuildScreen,
-    },
-    Test: {
-      screen: TestScreen,
-    },
-    CodePush: {
-      screen: CodePushScreen
-    },
-    Distribute: {
-      screen: DistributeScreen,
-    },
-    Crashes: {
-      screen: CrashesScreen,
-    },
-    Analytics: {
-      screen: AnalyticsScreen,
-    },
-    Push: {
-      screen: PushScreen,
+    {
+        initialRouteName: 'Welcome',
+        tabBarOptions: {
+            style: {
+                backgroundColor: "#252525"
+            },
+        },
+        navigationOptions: {
+            tabBarVisible: false,
+        },
+        lazy: false,
+        swipeEnabled: true
     }
-  },
-  {
-    initialRouteName: 'Welcome',
-    tabBarOptions: {
-      style: {
-        backgroundColor: "#252525"
-      },
-    },
-    navigationOptions: {
-      tabBarVisible: false,
-    },
-    lazy: false,
-    swipeEnabled: true
-  }
 );
 
 export default class App extends React.Component {
-  render() {
-  return <RootTabNavigator />;
-  }
+    render() {
+        return <RootTabNavigator />;
+    }
 }
