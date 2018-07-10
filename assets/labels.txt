@@ -1,9 +1,2 @@
-dime
-HDMI
-mouse
-notebook
-pens
-quarter
-pen
-starbucks
-wine
+bananas
+dollar bill
